@@ -1,20 +1,34 @@
-apiVersion: extensions/v1beta1
+apiVersion: v1
+kind: Service
+metadata:
+  name: reverseproxy
+spec:
+  selector:
+    app: reverseproxy
+  ports:
+    - protocol: TCP
+      port: 8080
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: reverseproxy
+    run: reverseproxy
   name: reverseproxy
 spec:
-  replicas: 2
+  selector:
+    matchLabels:
+      app: reverseproxy
+  replicas: 1
   template:
     metadata:
       labels:
-        service: reverseproxy
+        app: reverseproxy
     spec:
       containers:
-      - image: scheele/reverseproxy
+      - image: rmoeritz/reverseproxy:local
         name: reverseproxy
-        imagePullPolicy: Always          
+        imagePullPolicy: Never
         resources:
           requests:
             memory: "64Mi"
@@ -25,5 +39,3 @@ spec:
         ports:
         - containerPort: 8080
       restartPolicy: Always
-
-

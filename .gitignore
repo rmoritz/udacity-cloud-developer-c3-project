@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Travis CI private key
+deploy_key

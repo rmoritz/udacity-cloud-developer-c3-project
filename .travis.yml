@@ -19,6 +19,5 @@ install:
   -in deploy_key.enc -out ./deploy_key -d
 - eval "$(ssh-agent -s)"
 - chmod 600 ./deploy_key
-- echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
-- ssh -i ./deploy_key ubuntu@ec2-3-127-39-155.eu-central-1.compute.amazonaws.com pwd
+- ssh -i ./deploy_key ubuntu@ec2-3-127-39-155.eu-central-1.compute.amazonaws.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no pwd

@@ -26,9 +26,9 @@ spec:
         app: backend-feed
     spec:
       containers:
-      - image: rmoeritz/udacity-restapi-feed:local
+      - image: rmoeritz/udacity-restapi-feed:latest
         name: backend-feed
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"

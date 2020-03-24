@@ -27,9 +27,9 @@ spec:
         api: external        
     spec:
       containers:
-      - image: rmoeritz/udacity-frontend:local
+      - image: rmoeritz/udacity-frontend:latest
         name: frontend
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:

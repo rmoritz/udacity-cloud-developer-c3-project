@@ -26,9 +26,9 @@ spec:
         app: backend-user
     spec:
       containers:
-      - image: rmoeritz/udacity-restapi-user:local
+      - image: rmoeritz/udacity-restapi-user:latest
         name: backend-user 
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"

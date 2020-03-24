@@ -26,9 +26,9 @@ spec:
         app: reverseproxy
     spec:
       containers:
-      - image: rmoeritz/reverseproxy:local
+      - image: rmoeritz/reverseproxy:latest
         name: reverseproxy
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"

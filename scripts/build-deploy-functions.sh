@@ -21,18 +21,6 @@ function generate_ssh_pk {
     ssh-add ./deploy_key
 }
 
-## Login to prod host using SSH
-# Requires environment variables:
-#  - DOCKER_USERNAME
-#  - TAG 
-#  - PROD_HOST
-# Requires tools:
-#  - ssh
-function login_ssh_prod_host {
-    echo '======== LOGIN SSH PROD HOST ========'
-    ssh -i ./deploy_key ${PROD_HOST} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -oSendEnv=DOCKER_USERNAME -oSendEnv=TAG
-}
-
 ## Delete all K8s deployments and services
 # Requires tools:
 #  - kubectl
@@ -72,4 +60,23 @@ function k8s_deploy {
     envsubst < ./src/udacity-c3-deployment/k8s/backend-user-deployment.yaml | kubectl apply -f -
     envsubst < ./src/udacity-c3-deployment/k8s/frontend-deployment.yaml | kubectl apply -f -
     envsubst < ./src/udacity-c3-deployment/k8s/reverseproxy-deployment.yaml | kubectl apply -f -
+}
+
+## Login to prod host using SSH and deploy
+# Requires environment variables:
+#  - DOCKER_USERNAME
+#  - TAG 
+#  - PROD_HOST
+# Requires tools:
+#  - ssh
+# Depends on:
+#  - k8s_deploy
+function k8s_deploy_on_prod_host {
+    echo '======== LOGIN SSH PROD HOST ========'
+    ssh -i ./deploy_key ${PROD_HOST} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -oSendEnv=DOCKER_USERNAME -oSendEnv=TAG << EOF
+ cd ./udacity-cloud-developer-c3-project
+ git pull
+ source ./scripts/build-deploy-functions.sh
+ k8s_deploy
+EOF    
 }

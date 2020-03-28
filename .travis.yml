@@ -9,9 +9,4 @@ before_install:
 - generate_ssh_pk
 install:
 - build_and_push_docker_images
-- login_ssh_prod_host
-# Executed on prod host
-- cd ./udacity-cloud-developer-c3-project
-- git pull
-- source ./scripts/build-deploy-functions.sh
-- k8s_deploy
+- k8s_deploy_on_prod_host

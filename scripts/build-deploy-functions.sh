@@ -48,20 +48,6 @@ function build_and_push_docker_images {
     docker push ${DOCKER_USERNAME}/reverseproxy:${TAG}
 }
 
-## Create/update K8s services and deployments
-# Requires environment variables:
-#  - DOCKER_USERNAME
-#  - TAG
-# Requires tools:
-#  - kubectl
-function k8s_deploy {
-    echo '======== DEPLOY K8S ========'
-    envsubst < ./src/udacity-c3-deployment/k8s/backend-feed-deployment.yaml | kubectl apply -f -
-    envsubst < ./src/udacity-c3-deployment/k8s/backend-user-deployment.yaml | kubectl apply -f -
-    envsubst < ./src/udacity-c3-deployment/k8s/frontend-deployment.yaml | kubectl apply -f -
-    envsubst < ./src/udacity-c3-deployment/k8s/reverseproxy-deployment.yaml | kubectl apply -f -
-}
-
 ## Login to prod host using SSH and deploy
 # Requires environment variables:
 #  - DOCKER_USERNAME
@@ -73,10 +59,5 @@ function k8s_deploy {
 #  - k8s_deploy
 function k8s_deploy_on_prod_host {
     echo '======== LOGIN SSH PROD HOST ========'
-    ssh -i ./deploy_key ${PROD_HOST} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -oSendEnv=DOCKER_USERNAME -oSendEnv=TAG << EOF
- cd ./udacity-cloud-developer-c3-project
- git pull
- source ./scripts/build-deploy-functions.sh
- k8s_deploy
-EOF    
+    cat ./scripts/deploy.sh | ssh -i ./deploy_key ${PROD_HOST} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -oSendEnv=DOCKER_USERNAME -oSendEnv=TAG
 }

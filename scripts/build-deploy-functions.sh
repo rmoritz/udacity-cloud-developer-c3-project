@@ -59,5 +59,5 @@ function build_and_push_docker_images {
 #  - k8s_deploy
 function k8s_deploy_on_prod_host {
     echo '======== LOGIN SSH PROD HOST ========'
-    cat ./scripts/deploy.sh | ssh -i ./deploy_key ${PROD_HOST} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -oSendEnv=DOCKER_USERNAME -oSendEnv=TAG
+    ssh -i ./deploy_key ${PROD_HOST} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -oSendEnv=DOCKER_USERNAME -oSendEnv=TAG < ./scripts/deploy.sh
 }

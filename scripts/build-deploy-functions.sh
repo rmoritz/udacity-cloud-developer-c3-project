@@ -15,8 +15,7 @@ function download_and_install_kubectl {
 #  - ssh-add
 function generate_ssh_pk {
     echo '======== GENERATE SSH PK ========'
-    openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv
-  -in deploy_key.enc -out ./deploy_key -d
+    openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
     chmod 600 ./deploy_key
     eval "$(ssh-agent -s)"
     ssh-add ./deploy_key

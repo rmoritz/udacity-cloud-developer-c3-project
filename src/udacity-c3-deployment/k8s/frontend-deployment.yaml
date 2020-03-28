@@ -16,6 +16,11 @@ metadata:
     app: frontend
   name: frontend
 spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0   
   selector:
     matchLabels:
       app: frontend
@@ -27,9 +32,9 @@ spec:
         api: external        
     spec:
       containers:
-      - image: rmoeritz/udacity-frontend:latest
+      - image: $DOCKER_USERNAME/udacity-frontend:$TAG
         name: frontend
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         resources:

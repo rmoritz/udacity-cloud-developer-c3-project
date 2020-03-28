@@ -16,6 +16,11 @@ metadata:
     run: reverseproxy
   name: reverseproxy
 spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 
   selector:
     matchLabels:
       app: reverseproxy
@@ -26,9 +31,9 @@ spec:
         app: reverseproxy
     spec:
       containers:
-      - image: rmoeritz/reverseproxy:latest
+      - image: $DOCKER_USERNAME/reverseproxy:$TAG
         name: reverseproxy
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: "64Mi"

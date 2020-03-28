@@ -16,6 +16,11 @@ metadata:
     app: backend-user
   name: backend-user
 spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0        
   selector:
     matchLabels:
       app: backend-user
@@ -26,9 +31,9 @@ spec:
         app: backend-user
     spec:
       containers:
-      - image: rmoeritz/udacity-restapi-user:latest
+      - image: $DOCKER_USERNAME/udacity-restapi-user:$TAG
         name: backend-user 
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: "64Mi"

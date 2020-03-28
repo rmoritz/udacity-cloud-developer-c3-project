@@ -16,6 +16,11 @@ metadata:
     app: backend-feed
   name: backend-feed
 spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0   
   selector:
     matchLabels:
       app: backend-feed
@@ -26,9 +31,9 @@ spec:
         app: backend-feed
     spec:
       containers:
-      - image: rmoeritz/udacity-restapi-feed:latest
+      - image: $DOCKER_USERNAME/udacity-restapi-feed:$TAG
         name: backend-feed
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: "64Mi"

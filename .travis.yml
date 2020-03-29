@@ -1,0 +1,12 @@
+language: minimal
+services: docker
+env:
+- TAG=${TRAVIS_BUILD_ID}
+before_install:
+- docker -v && docker-compose -v
+- source ./scripts/build-deploy-functions.sh
+- download_and_install_kubectl
+- generate_ssh_pk
+install:
+- build_and_push_docker_images
+- k8s_deploy_on_prod_host

@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-user
+spec:
+  selector:
+    app: backend-user
+  ports:
+    - protocol: TCP
+      port: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-user
+  name: backend-user
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: backend-user
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: backend-user
+    spec:
+      containers:
+      - image: $DOCKER_USERNAME/udacity-restapi-user:$TAG
+        name: backend-user 
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"      
+        env:
+        - name: URL
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: URL 
+        - name: JWT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: JWT_SECRET
+        - name: POSTGRESS_DB
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: POSTGRESS_DB
+        - name: POSTGRESS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: POSTGRESS_HOST
+        - name: POSTGRESS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRESS_PASSWORD
+        - name: POSTGRESS_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRESS_USERNAME
+      restartPolicy: Always
+
+

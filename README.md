@@ -4,7 +4,7 @@
 
 This is my submission for the project assignment in course 3 of the Udacity
 Cloud Developer Nanodegree. It is a modified version of the Udagram image
-sharing web app, modified to run on a Kubernetes cluster.
+sharing web app that runs in a Kubernetes cluster.
 
 The build & deploy steps have been optimized for a CI/CD tool (Travis-CI),
 which does the following:
@@ -23,6 +23,9 @@ which does the following:
 4. Login to the production EC2 server using SSH and create/update the
    Kubernetes deployments and services for the application components. This will
    cause a rolling update (A/B deployment) of all existing deployments.
+
+To keep the `.travis.yml` file neat & tidy, most of the heavy lifting has
+been outsourced to shell functions defined in `scripts/build-deploy-functions.sh`.
 
 ## How to build and deploy locally
 

@@ -1,6 +1,6 @@
 # Refactor Udagram App into Microservices and Deploy
 
-[![Build Status](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project.svg?branch=dev)](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project)
+[![Build Status](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project.svg?branch=master)](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project)
 
 This is my submission for the project assignment in course 3 of the Udacity
 Cloud Developer Nanodegree. It is a modified version of the Udagram image

@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: frontend
-    service: $TAG
+    version: "$TAG"
   ports:
     - protocol: TCP
       port: 80

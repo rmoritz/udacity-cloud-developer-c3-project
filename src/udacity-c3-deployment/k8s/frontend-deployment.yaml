@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: frontend
-    version: $TAG
+    version: "$TAG"
   name: frontend-$TAG
 spec:
   strategy:

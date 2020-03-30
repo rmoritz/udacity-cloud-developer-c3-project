@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-feed
+spec:
+  selector:
+    app: backend-feed
+    version: "$TAG"
+  ports:
+    - protocol: TCP
+      port: 8080

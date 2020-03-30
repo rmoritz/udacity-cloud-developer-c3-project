@@ -1,6 +1,6 @@
 # Refactor Udagram App into Microservices and Deploy
 
-[![Build Status](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project.svg?branch=dev)](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project)
+[![Build Status](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project.svg?branch=master)](https://travis-ci.com/rmoritz/udacity-cloud-developer-c3-project)
 
 This is my submission for the project assignment in course 3 of the Udacity
 Cloud Developer Nanodegree. It is a modified version of the Udagram image
@@ -21,8 +21,7 @@ which does the following:
 3. Tag the images with the Travis-CI build ID, and push them to Docker Hub -
    see https://hub.docker.com/u/rmoeritz.
 4. Login to the production EC2 server using SSH and create/update the
-   Kubernetes deployments and services for the application components. This will
-   cause a rolling update (A/B deployment) of all existing deployments.
+   Kubernetes deployments and services for the application components. This will cause a blue/green update of all existing deployments.
 
 To keep the `.travis.yml` file neat & tidy, most of the heavy lifting has
 been outsourced to shell functions defined in `scripts/build-deploy-functions.sh`.

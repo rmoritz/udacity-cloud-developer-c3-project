@@ -40,7 +40,7 @@ git pull
 
 for SVC in ${SERVICES}
 do
-    DEPLOYMENT=${SERVICE}-${TAG}
+    DEPLOYMENT=${SVC}-${TAG}
     
     create_k8s_deployment
     wait_until_k8s_deployment_ready

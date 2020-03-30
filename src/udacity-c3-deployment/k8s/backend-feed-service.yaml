@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: backend-feed
-    version: $TAG
+    version: "$TAG"
   ports:
     - protocol: TCP
       port: 8080

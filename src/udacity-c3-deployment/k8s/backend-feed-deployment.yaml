@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: backend-feed
-    version: $TAG
+    version: "$TAG"
   name: backend-feed-$TAG
 spec:
   strategy:

@@ -28,7 +28,7 @@ function create_or_update_service {
 #  - NEW_DEPLOY
 #  - KUBECTL
 function wait_until_new_deployment_ready {
-    echo "======== WAIT UNTIL K8S DEPLOYMENT ${DEPLOYMENT} READY ========"
+    echo "======== WAIT UNTIL K8S DEPLOYMENT ${NEW_DEPLOY} READY ========"
     READY=$(${KUBECTL} get deploy ${NEW_DEPLOY} -o json | jq '.status.conditions[] | select(.reason == "MinimumReplicasAvailable") | .status' | tr -d '"')
     while [[ "$READY" != "True" ]]; do
         READY=$(${KUBECTL} get deploy ${NEW_DEPLOY} -o json | jq '.status.conditions[] | select(.reason == "MinimumReplicasAvailable") | .status' | tr -d '"')

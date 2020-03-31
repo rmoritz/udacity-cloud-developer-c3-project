@@ -21,15 +21,6 @@ function generate_ssh_pk {
     ssh-add ./deploy_key
 }
 
-## Delete all K8s deployments and services
-# Requires tools:
-#  - kubectl
-function k8s_clean {
-    echo '======== CLEAN-UP K8s ========'
-    kubectl delete deployments $(kubectl get deployments | tail -n +2 | cut -d ' ' -f 1)
-    kubectl delete services $(kubectl get services | tail -n +2 | cut -d ' ' -f 1)
-}
-
 ## Build, tag and push Docker images to Docker Hub
 # Requires environment variables:
 #  - DOCKER_USERNAME

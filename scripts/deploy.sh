@@ -50,7 +50,8 @@ function find_old_deployment {
 #   - KUBECTL
 #   - OLD_DEPLOY
 function delete_old_deployment {
-    if [ -n "$OLD_DEPLOY" ] then
+    if [ -n "$OLD_DEPLOY" ]
+    then
         echo "======== DELETE DEPLOYMENT ${OLD_DEPLOY} ========"
         ${KUBECTL} delete deploy ${OLD_DEPLOY}
     fi
